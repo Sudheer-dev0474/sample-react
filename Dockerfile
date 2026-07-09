@@ -1,11 +1,13 @@
-FROM node:25-alpine AS build
-ADD . /app
-WORKDIR /app
-RUN npm install && \
-    npm run build 
+FROM node:26-alpine3.23  AS build
 
-FROM nginx:1.29.3-alpine AS runtime
-LABEL project="mynodejsproject"
-LABEL author="devopsteam"
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 3000    
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install  # to install dependies
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "npm", "start"]

@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '23'
       - name: Install dependencies
-        run: npm insatll
+        run: npm install
 
       - name: build docker image
         run: docker image build -t icarenodejs:1.0 .

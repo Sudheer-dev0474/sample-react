@@ -1,0 +1,27 @@
+name: CICD-ICARE-NODEJS
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Insatll dependencies
+        run: npm insatll
+
+      - name: build docker image
+        run: docker image build -t icarenodejs:1.0 .
+      
+      - name: run container
+        run: docker container run -d -p 3000:3000 --name icarecontainer icarenodejs:1.0
+

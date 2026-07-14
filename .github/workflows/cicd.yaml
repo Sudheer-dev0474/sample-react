@@ -20,7 +20,7 @@ jobs:
         run: npm install
 
       - name: build docker image
-        run: docker image build -t icarenodejs:1.0 .
+        run: docker image build -t ${{ secrets.DOCKER_USERNAME }}/icarenodejs:1.0 .
       
       - name: run container
         run: docker container run -d -p 3000:3000 --name icarecontainer icarenodejs:1.0

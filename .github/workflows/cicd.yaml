@@ -23,7 +23,7 @@ jobs:
         run: docker image build -t ${{ secrets.DOCKER_USERNAME }}/icarenodejs:1.0 .
       
       - name: run container
-        run: docker container run -d -p 3000:3000 --name icarecontainer icarenodejs:1.0
+        run: docker container run -d -p 3000:3000 --name icarecontainer ${{ secrets.DOCKER_USERNAME }}/icarenodejs:1.0
 
       - name: login to dockerhub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}"  --password-stdin
